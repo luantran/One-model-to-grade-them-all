@@ -1,0 +1,151 @@
+{
+  "timestamp": "2025-11-26T04:00:34.563664",
+  "configuration": {
+    "experiment_name": "Experiment2_Doc2Vec",
+    "output_dir": "results/Experiment2_Doc2Vec",
+    "train_path": "dataset/splits/train_100k.csv",
+    "test_path": "dataset/splits/test_other_corpora.csv",
+    "remaining_samples_path": "dataset/splits/remaining_samples.csv",
+    "val_size": 0.2,
+    "random_state": 42,
+    "embedding_model": "doc2vec",
+    "embedding_name": "doc2vec-trained",
+    "agg_method": "mean",
+    "stop_words": null,
+    "doc2vec_epochs": 10,
+    "hidden_dim": 128,
+    "batch_size": 64,
+    "epochs": 10,
+    "learning_rate": 0.001
+  },
+  "in_domain_test_results": {
+    "accuracy": 0.8854113799131562,
+    "adjacent_accuracy": 0.9800372187447133,
+    "qwk": 0.9462550213336385,
+    "oca": 0.9371510742683133,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.9206117989803351,
+          "recall": 0.948,
+          "f1": 0.9341051853676561,
+          "support": 4000
+        },
+        "A2": {
+          "precision": 0.875064135454079,
+          "recall": 0.85275,
+          "f1": 0.8637629779691061,
+          "support": 4000
+        },
+        "B1": {
+          "precision": 0.8536102868447082,
+          "recall": 0.8669010547463586,
+          "f1": 0.860204335908298,
+          "support": 3982
+        },
+        "B2": {
+          "precision": 0.8882289416846653,
+          "recall": 0.8773333333333333,
+          "f1": 0.8827475181110813,
+          "support": 3750
+        },
+        "C1/C2": {
+          "precision": 0.8922764227642277,
+          "recall": 0.8775612193903048,
+          "f1": 0.8848576467624086,
+          "support": 2001
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.8852469155372469,
+        "recall": 0.8854113799131562,
+        "f1": 0.8852258311070901,
+        "support": 17733
+      },
+      "macro_avg": {
+        "precision": 0.885958317145603,
+        "recall": 0.8845091214939993,
+        "f1": 0.8851355328237099,
+        "support": 17733
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.25940996948118006,
+    "adjacent_accuracy": 0.742681134847971,
+    "qwk": 0.33147166601629363,
+    "oca": 0.5582542104668249,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.07700770077007701,
+          "recall": 0.35353535353535354,
+          "f1": 0.12646793134598014,
+          "support": 198
+        },
+        "A2": {
+          "precision": 0.5322128851540616,
+          "recall": 0.2715061446127465,
+          "f1": 0.35957607872823616,
+          "support": 3499
+        },
+        "B1": {
+          "precision": 0.5171945701357467,
+          "recall": 0.12848471223021582,
+          "f1": 0.20583468395461912,
+          "support": 8896
+        },
+        "B2": {
+          "precision": 0.25386100386100385,
+          "recall": 0.47290007706139225,
+          "f1": 0.3303723642889188,
+          "support": 3893
+        },
+        "C1/C2": {
+          "precision": 0.10581437342000723,
+          "recall": 0.48509933774834435,
+          "f1": 0.1737325822709754,
+          "support": 1208
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.4292148726662369,
+        "recall": 0.25940996948118006,
+        "f1": 0.26055788809183866,
+        "support": 17694
+      },
+      "macro_avg": {
+        "precision": 0.29721810666817927,
+        "recall": 0.34230512503761046,
+        "f1": 0.23919672811774592,
+        "support": 17694
+      }
+    }
+  },
+  "generalization": {
+    "gap": 0.6260014104319762,
+    "gap_percentage": 62.600141043197624
+  },
+  "per_corpus_results": {
+    "asag": {
+      "accuracy": 0.43478260869565216,
+      "samples": 299
+    },
+    "icnale_we_learners": {
+      "accuracy": 0.059807692307692305,
+      "samples": 5200
+    },
+    "icnale_we_uae_learners": {
+      "accuracy": 0.35,
+      "samples": 200
+    },
+    "icnale_wep_learners": {
+      "accuracy": 0.1460970464135021,
+      "samples": 1896
+    },
+    "write_improve_first_and_final": {
+      "accuracy": 0.37647291811070405,
+      "samples": 10099
+    }
+  }
+}

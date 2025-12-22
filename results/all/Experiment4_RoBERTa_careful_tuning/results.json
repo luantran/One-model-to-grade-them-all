@@ -1,0 +1,148 @@
+{
+  "timestamp": "2025-11-26T09:17:50.918317",
+  "configuration": {
+    "experiment_name": "Experiment4_RoBERTa_careful_tuning",
+    "output_dir": "results/Experiment4_RoBERTa_careful_tuning",
+    "train_path": "dataset/splits/train_100k.csv",
+    "test_path": "dataset/splits/test_other_corpora.csv",
+    "val_size": 0.2,
+    "random_state": 42,
+    "model_name": "roberta-base",
+    "max_length": 512,
+    "batch_size": 16,
+    "epochs": 10,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.01,
+    "freeze_encoder": false
+  },
+  "in_domain_test_results": {
+    "accuracy": 0.9824046920821115,
+    "adjacent_accuracy": 0.9963907060681254,
+    "qwk": 0.9911181076168973,
+    "oca": 0.990187232122716,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.9949723479135244,
+          "recall": 0.9895,
+          "f1": 0.9922286287290047,
+          "support": 2000
+        },
+        "A2": {
+          "precision": 0.9787128712871287,
+          "recall": 0.9885,
+          "f1": 0.9835820895522388,
+          "support": 2000
+        },
+        "B1": {
+          "precision": 0.9770687936191426,
+          "recall": 0.9844299347061778,
+          "f1": 0.9807355516637478,
+          "support": 1991
+        },
+        "B2": {
+          "precision": 0.9764075067024128,
+          "recall": 0.9712,
+          "f1": 0.9737967914438502,
+          "support": 1875
+        },
+        "C1/C2": {
+          "precision": 0.986815415821501,
+          "recall": 0.973,
+          "f1": 0.9798590130916415,
+          "support": 1000
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.9824378408961814,
+        "recall": 0.9824046920821115,
+        "f1": 0.9824040059749458,
+        "support": 8866
+      },
+      "macro_avg": {
+        "precision": 0.982795387068742,
+        "recall": 0.9813259869412356,
+        "f1": 0.9820404148960966,
+        "support": 8866
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.25940996948118006,
+    "adjacent_accuracy": 0.7844467050977733,
+    "qwk": 0.3321155176557691,
+    "oca": 0.5695716061941901,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.08624708624708624,
+          "recall": 0.37373737373737376,
+          "f1": 0.14015151515151514,
+          "support": 198
+        },
+        "A2": {
+          "precision": 0.5861581920903954,
+          "recall": 0.23721063160903116,
+          "f1": 0.3377416073245168,
+          "support": 3499
+        },
+        "B1": {
+          "precision": 0.49932614555256066,
+          "recall": 0.08329586330935251,
+          "f1": 0.14277456647398845,
+          "support": 8896
+        },
+        "B2": {
+          "precision": 0.25400551076640476,
+          "recall": 0.6393526843051631,
+          "f1": 0.3635699678644464,
+          "support": 3893
+        },
+        "C1/C2": {
+          "precision": 0.11022480058013052,
+          "recall": 0.37748344370860926,
+          "f1": 0.1706267539756782,
+          "support": 1208
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.4313351893608685,
+        "recall": 0.25940996948118006,
+        "f1": 0.2317805714411662,
+        "support": 17694
+      },
+      "macro_avg": {
+        "precision": 0.3071923470473155,
+        "recall": 0.34221599933390595,
+        "f1": 0.23097288215802902,
+        "support": 17694
+      }
+    }
+  },
+  "generalization": {
+    "gap": 0.7229947226009314,
+    "gap_percentage": 72.29947226009314
+  },
+  "per_corpus_results": {
+    "asag": {
+      "accuracy": 0.44481605351170567,
+      "samples": 299
+    },
+    "icnale_we_learners": {
+      "accuracy": 0.06192307692307692,
+      "samples": 5200
+    },
+    "icnale_we_uae_learners": {
+      "accuracy": 0.475,
+      "samples": 200
+    },
+    "icnale_wep_learners": {
+      "accuracy": 0.2621308016877637,
+      "samples": 1896
+    },
+    "write_improve_first_and_final": {
+      "accuracy": 0.35082681453609266,
+      "samples": 10099
+    }
+  }
+}

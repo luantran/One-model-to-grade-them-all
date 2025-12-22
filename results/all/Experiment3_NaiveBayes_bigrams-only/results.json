@@ -1,0 +1,148 @@
+{
+  "timestamp": "2025-11-26T03:34:24.164931",
+  "configuration": {
+    "experiment_name": "Experiment3_NaiveBayes_bigrams-only",
+    "train_path": "dataset/splits/train_100k.csv",
+    "test_path": "dataset/splits/test_other_corpora.csv",
+    "output_dir": "results/Experiment3_NaiveBayes_bigrams-only",
+    "method": "tfidf",
+    "max_features": 5000,
+    "ngram_range": [
+      2,
+      2
+    ],
+    "alpha": 1.0,
+    "val_size": 0.2,
+    "random_state": 6781
+  },
+  "in_domain_test_results": {
+    "accuracy": 0.8391699092088197,
+    "adjacent_accuracy": 0.9539840974454407,
+    "qwk": 0.8974416088393575,
+    "oca": 0.9059803755709693,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.923728813559322,
+          "recall": 0.9265,
+          "f1": 0.9251123315027459,
+          "support": 4000
+        },
+        "A2": {
+          "precision": 0.8746268656716418,
+          "recall": 0.80575,
+          "f1": 0.8387768379960963,
+          "support": 4000
+        },
+        "B1": {
+          "precision": 0.7835680751173709,
+          "recall": 0.8382722250125565,
+          "f1": 0.8099975734045135,
+          "support": 3982
+        },
+        "B2": {
+          "precision": 0.7806072477962782,
+          "recall": 0.8501333333333333,
+          "f1": 0.8138881797293848,
+          "support": 3750
+        },
+        "C1/C2": {
+          "precision": 0.8427895981087471,
+          "recall": 0.7126436781609196,
+          "f1": 0.7722718656918495,
+          "support": 2001
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.8417802942024966,
+        "recall": 0.8391699092088197,
+        "f1": 0.839021242459072,
+        "support": 17733
+      },
+      "macro_avg": {
+        "precision": 0.8410641200506721,
+        "recall": 0.826659847301362,
+        "f1": 0.832009357664918,
+        "support": 17733
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.3214649033570702,
+    "adjacent_accuracy": 0.802249350062168,
+    "qwk": 0.3194891626397445,
+    "oca": 0.6071973550356052,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.08428246013667426,
+          "recall": 0.18686868686868688,
+          "f1": 0.11616954474097331,
+          "support": 198
+        },
+        "A2": {
+          "precision": 0.49739776951672865,
+          "recall": 0.19119748499571307,
+          "f1": 0.27621800165152766,
+          "support": 3499
+        },
+        "B1": {
+          "precision": 0.5196635120925341,
+          "recall": 0.27776528776978415,
+          "f1": 0.36202476009083584,
+          "support": 8896
+        },
+        "B2": {
+          "precision": 0.27438443749149777,
+          "recall": 0.5181094271769844,
+          "f1": 0.3587691213091427,
+          "support": 3893
+        },
+        "C1/C2": {
+          "precision": 0.129863301787592,
+          "recall": 0.40894039735099336,
+          "f1": 0.1971268954509178,
+          "support": 1208
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.4298102639276077,
+        "recall": 0.3214649033570702,
+        "f1": 0.3303310784653942,
+        "support": 17694
+      },
+      "macro_avg": {
+        "precision": 0.30111829620500535,
+        "recall": 0.31657625683243235,
+        "f1": 0.2620616646486794,
+        "support": 17694
+      }
+    }
+  },
+  "generalization": {
+    "gap": 0.5177050058517496,
+    "gap_percentage": 51.77050058517496
+  },
+  "per_corpus_results": {
+    "asag": {
+      "accuracy": 0.40468227424749165,
+      "samples": 299
+    },
+    "icnale_we_learners": {
+      "accuracy": 0.21096153846153845,
+      "samples": 5200
+    },
+    "icnale_we_uae_learners": {
+      "accuracy": 0.4,
+      "samples": 200
+    },
+    "icnale_wep_learners": {
+      "accuracy": 0.2552742616033755,
+      "samples": 1896
+    },
+    "write_improve_first_and_final": {
+      "accuracy": 0.3867709674225171,
+      "samples": 10099
+    }
+  }
+}

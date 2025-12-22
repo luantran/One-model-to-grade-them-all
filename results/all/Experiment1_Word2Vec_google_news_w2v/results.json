@@ -1,0 +1,151 @@
+{
+  "timestamp": "2025-11-26T03:42:19.934342",
+  "configuration": {
+    "experiment_name": "Experiment1_Word2Vec_google_news_w2v",
+    "output_dir": "results/Experiment1_Word2Vec_google_news_w2v",
+    "train_path": "dataset/splits/train_100k.csv",
+    "test_path": "dataset/splits/test_other_corpora.csv",
+    "remaining_samples_path": "dataset/splits/remaining_samples.csv",
+    "val_size": 0.2,
+    "random_state": 42,
+    "embedding_model": "w2v",
+    "embedding_name": "word2vec-google-news-300",
+    "agg_method": "mean",
+    "stop_words": null,
+    "doc2vec_epochs": 40,
+    "hidden_dim": 128,
+    "batch_size": 64,
+    "epochs": 10,
+    "learning_rate": 0.001
+  },
+  "in_domain_test_results": {
+    "accuracy": 0.8595274347262166,
+    "adjacent_accuracy": 0.9552247222692156,
+    "qwk": 0.9055656604363798,
+    "oca": 0.9163001184232786,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.9286935286935287,
+          "recall": 0.95075,
+          "f1": 0.9395923409512045,
+          "support": 4000
+        },
+        "A2": {
+          "precision": 0.885925534724056,
+          "recall": 0.83875,
+          "f1": 0.8616925645306279,
+          "support": 4000
+        },
+        "B1": {
+          "precision": 0.8257312840852752,
+          "recall": 0.8365143144148669,
+          "f1": 0.8310878243512974,
+          "support": 3982
+        },
+        "B2": {
+          "precision": 0.8170918367346939,
+          "recall": 0.8541333333333333,
+          "f1": 0.8352020860495437,
+          "support": 3750
+        },
+        "C1/C2": {
+          "precision": 0.8170795993674222,
+          "recall": 0.7746126936531734,
+          "f1": 0.7952796305797845,
+          "support": 2001
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.8597309475546844,
+        "recall": 0.8595274347262166,
+        "f1": 0.859295872213959,
+        "support": 17733
+      },
+      "macro_avg": {
+        "precision": 0.8549043567209953,
+        "recall": 0.8509520682802748,
+        "f1": 0.8525708892924916,
+        "support": 17733
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.277438679778456,
+    "adjacent_accuracy": 0.7750649937832034,
+    "qwk": 0.32894182046610454,
+    "oca": 0.5769752458460495,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.06740681998413957,
+          "recall": 0.4292929292929293,
+          "f1": 0.11651816312542837,
+          "support": 198
+        },
+        "A2": {
+          "precision": 0.45925925925925926,
+          "recall": 0.15947413546727637,
+          "f1": 0.23674162070428512,
+          "support": 3499
+        },
+        "B1": {
+          "precision": 0.5233808452113028,
+          "recall": 0.23527428057553956,
+          "f1": 0.32462194649088794,
+          "support": 8896
+        },
+        "B2": {
+          "precision": 0.23352699447357234,
+          "recall": 0.42332391471872594,
+          "f1": 0.3010045662100457,
+          "support": 3893
+        },
+        "C1/C2": {
+          "precision": 0.1261412782316194,
+          "recall": 0.43460264900662254,
+          "f1": 0.19553072625698323,
+          "support": 1208
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.4147049819766119,
+        "recall": 0.277438679778456,
+        "f1": 0.29090529313327745,
+        "support": 17694
+      },
+      "macro_avg": {
+        "precision": 0.2819430394319787,
+        "recall": 0.33639358181221873,
+        "f1": 0.23488340455752604,
+        "support": 17694
+      }
+    }
+  },
+  "generalization": {
+    "gap": 0.5820887549477607,
+    "gap_percentage": 58.208875494776066
+  },
+  "per_corpus_results": {
+    "asag": {
+      "accuracy": 0.41471571906354515,
+      "samples": 299
+    },
+    "icnale_we_learners": {
+      "accuracy": 0.1528846153846154,
+      "samples": 5200
+    },
+    "icnale_we_uae_learners": {
+      "accuracy": 0.42,
+      "samples": 200
+    },
+    "icnale_wep_learners": {
+      "accuracy": 0.30063291139240506,
+      "samples": 1896
+    },
+    "write_improve_first_and_final": {
+      "accuracy": 0.3303297356173879,
+      "samples": 10099
+    }
+  }
+}

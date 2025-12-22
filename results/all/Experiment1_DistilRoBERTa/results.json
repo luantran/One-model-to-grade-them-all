@@ -1,0 +1,148 @@
+{
+  "timestamp": "2025-11-26T07:47:28.431862",
+  "configuration": {
+    "experiment_name": "Experiment1_DistilRoBERTa",
+    "output_dir": "results/Experiment1_DistilRoBERTa",
+    "train_path": "dataset/splits/train_100k.csv",
+    "test_path": "dataset/splits/test_other_corpora.csv",
+    "val_size": 0.2,
+    "random_state": 42,
+    "model_name": "distilroberta-base",
+    "max_length": 512,
+    "batch_size": 32,
+    "epochs": 7,
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "freeze_encoder": false
+  },
+  "in_domain_test_results": {
+    "accuracy": 0.9802616738100609,
+    "adjacent_accuracy": 0.9954883825851568,
+    "qwk": 0.9894221654745927,
+    "oca": 0.988833746898263,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.9910269192422732,
+          "recall": 0.994,
+          "f1": 0.9925112331502746,
+          "support": 2000
+        },
+        "A2": {
+          "precision": 0.9791252485089463,
+          "recall": 0.985,
+          "f1": 0.9820538384845464,
+          "support": 2000
+        },
+        "B1": {
+          "precision": 0.9792929292929293,
+          "recall": 0.9738824711200402,
+          "f1": 0.976580206497104,
+          "support": 1991
+        },
+        "B2": {
+          "precision": 0.9722518676627535,
+          "recall": 0.9717333333333333,
+          "f1": 0.9719925313416912,
+          "support": 1875
+        },
+        "C1/C2": {
+          "precision": 0.9778672032193159,
+          "recall": 0.972,
+          "f1": 0.9749247743229689,
+          "support": 1000
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.9802522008585202,
+        "recall": 0.9802616738100609,
+        "f1": 0.9802517600940689,
+        "support": 8866
+      },
+      "macro_avg": {
+        "precision": 0.9799128335852437,
+        "recall": 0.9793231608906747,
+        "f1": 0.9796125167593169,
+        "support": 8866
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.2539844014920312,
+    "adjacent_accuracy": 0.8082965977167401,
+    "qwk": 0.3587182535299708,
+    "oca": 0.5745874307674919,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.07698289269051321,
+          "recall": 0.5,
+          "f1": 0.1334231805929919,
+          "support": 198
+        },
+        "A2": {
+          "precision": 0.5821033210332104,
+          "recall": 0.1803372392112032,
+          "f1": 0.2753654811259001,
+          "support": 3499
+        },
+        "B1": {
+          "precision": 0.5229970326409495,
+          "recall": 0.07924910071942447,
+          "f1": 0.1376415462709879,
+          "support": 8896
+        },
+        "B2": {
+          "precision": 0.25397265336289726,
+          "recall": 0.7061392242486514,
+          "f1": 0.3735815723313175,
+          "support": 3893
+        },
+        "C1/C2": {
+          "precision": 0.0983502538071066,
+          "recall": 0.25662251655629137,
+          "f1": 0.14220183486238533,
+          "support": 1208
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.44151273773949107,
+        "recall": 0.2539844014920312,
+        "f1": 0.21705175095756898,
+        "support": 17694
+      },
+      "macro_avg": {
+        "precision": 0.3068812307069354,
+        "recall": 0.34446961614711413,
+        "f1": 0.21244272303671657,
+        "support": 17694
+      }
+    }
+  },
+  "generalization": {
+    "gap": 0.7262772723180297,
+    "gap_percentage": 72.62772723180298
+  },
+  "per_corpus_results": {
+    "asag": {
+      "accuracy": 0.4080267558528428,
+      "samples": 299
+    },
+    "icnale_we_learners": {
+      "accuracy": 0.07403846153846154,
+      "samples": 5200
+    },
+    "icnale_we_uae_learners": {
+      "accuracy": 0.515,
+      "samples": 200
+    },
+    "icnale_wep_learners": {
+      "accuracy": 0.2805907172995781,
+      "samples": 1896
+    },
+    "write_improve_first_and_final": {
+      "accuracy": 0.33191405089612835,
+      "samples": 10099
+    }
+  }
+}

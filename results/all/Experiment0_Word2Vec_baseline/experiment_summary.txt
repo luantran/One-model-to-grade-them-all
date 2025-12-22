@@ -1,0 +1,88 @@
+EXPERIMENT: NAIVE BAYES CEFR - CORPUS-BASED EVALUATION
+================================================================================
+
+CONFIGURATION:
+--------------------------------------------------------------------------------
+  experiment_name: Experiment0_Word2Vec_baseline
+  output_dir: results/Experiment0_Word2Vec_baseline
+  train_path: dataset/splits/train_100k.csv
+  test_path: dataset/splits/test_other_corpora.csv
+  remaining_samples_path: dataset/splits/remaining_samples.csv
+  val_size: 0.2
+  random_state: 42
+  embedding_model: w2v
+  embedding_name: glove-wiki-gigaword-300
+  agg_method: mean
+  stop_words: None
+  doc2vec_epochs: 40
+  hidden_dim: 128
+  batch_size: 64
+  epochs: 10
+  learning_rate: 0.001
+
+================================================================================
+IN-DOMAIN TEST RESULTS
+================================================================================
+
+Standard Metrics:
+  Exact Match Accuracy: 0.8601
+
+Classification Report:
+--------------------------------------------------------------------------------
+Class              Precision       Recall     F1-Score      Support
+--------------------------------------------------------------------------------
+Ordinal Classification Metrics:
+  Adjacent Accuracy (±1 level): 0.9609
+  Quadratic Weighted Kappa (QWK): 0.9117
+  Ordinal Classification Accuracy (OCA): 0.9186
+
+A1                    0.9653       0.9175       0.9408         4000
+A2                    0.8900       0.8515       0.8703         4000
+B1                    0.7900       0.8712       0.8286         3982
+B2                    0.7984       0.8725       0.8338         3750
+C1/C2                 0.8892       0.7176       0.7942         2001
+--------------------------------------------------------------------------------
+Weighted Avg          0.8651       0.8601       0.8606        17733
+Macro Avg             0.8666       0.8461       0.8536        17733
+
+================================================================================
+TEST RESULTS (Out-of-Domain)
+================================================================================
+
+Standard Metrics:
+  Exact Match Accuracy: 0.3509
+
+Ordinal Classification Metrics:
+  Adjacent Accuracy (±1 level): 0.8518
+  Quadratic Weighted Kappa (QWK): 0.3370
+  Ordinal Classification Accuracy (OCA): 0.6359
+
+Classification Report:
+--------------------------------------------------------------------------------
+Class              Precision       Recall     F1-Score      Support
+--------------------------------------------------------------------------------
+A1                    0.0781       0.2879       0.1228          198
+A2                    0.4946       0.1969       0.2817         3499
+B1                    0.5512       0.3694       0.4424         8896
+B2                    0.2513       0.4919       0.3326         3893
+C1/C2                 0.1312       0.2161       0.1633         1208
+--------------------------------------------------------------------------------
+Weighted Avg          0.4401       0.3509       0.3638        17694
+Macro Avg             0.3013       0.3124       0.2686        17694
+
+================================================================================
+GENERALIZATION ANALYSIS
+================================================================================
+
+Generalization Gap (In-Domain Test Accuracy - Out-Domain Test Accuracy): 0.5093 (50.93%)
+
+Per-Corpus Performance:
+--------------------------------------------------------------------------------
+Corpus                                          Accuracy         Samples
+--------------------------------------------------------------------------------
+asag                                              0.4147             299
+icnale_we_learners                                0.3027           5,200
+icnale_we_uae_learners                            0.5150             200
+icnale_wep_learners                               0.4098           1,896
+write_improve_first_and_final                     0.3594          10,099
+

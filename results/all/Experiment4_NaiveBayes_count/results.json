@@ -1,0 +1,148 @@
+{
+  "timestamp": "2025-11-26T03:34:47.434519",
+  "configuration": {
+    "experiment_name": "Experiment4_NaiveBayes_count",
+    "train_path": "dataset/splits/train_100k.csv",
+    "test_path": "dataset/splits/test_other_corpora.csv",
+    "output_dir": "results/Experiment4_NaiveBayes_count",
+    "method": "count",
+    "max_features": 5000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "alpha": 1.0,
+    "val_size": 0.2,
+    "random_state": 6781
+  },
+  "in_domain_test_results": {
+    "accuracy": 0.8388879490215981,
+    "adjacent_accuracy": 0.946991484802346,
+    "qwk": 0.885536484775837,
+    "oca": 0.9026250493430328,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.9279348102877515,
+          "recall": 0.911,
+          "f1": 0.9193894285353854,
+          "support": 4000
+        },
+        "A2": {
+          "precision": 0.8447500661200741,
+          "recall": 0.7985,
+          "f1": 0.8209741678447501,
+          "support": 4000
+        },
+        "B1": {
+          "precision": 0.8147220831246871,
+          "recall": 0.8171772978402813,
+          "f1": 0.8159478435305918,
+          "support": 3982
+        },
+        "B2": {
+          "precision": 0.821038961038961,
+          "recall": 0.8429333333333333,
+          "f1": 0.8318421052631579,
+          "support": 3750
+        },
+        "C1/C2": {
+          "precision": 0.7441540577716643,
+          "recall": 0.8110944527736131,
+          "f1": 0.776183644189383,
+          "support": 2001
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.840405527216546,
+        "recall": 0.8388879490215981,
+        "f1": 0.8392889000856684,
+        "support": 17733
+      },
+      "macro_avg": {
+        "precision": 0.8305199956686277,
+        "recall": 0.8361410167894455,
+        "f1": 0.8328674378726537,
+        "support": 17733
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.2767604837798124,
+    "adjacent_accuracy": 0.7350514298632305,
+    "qwk": 0.2999891166596421,
+    "oca": 0.5652904939527523,
+    "classification_metrics": {
+      "per_class": {
+        "A1": {
+          "precision": 0.09112709832134293,
+          "recall": 0.1919191919191919,
+          "f1": 0.12357723577235773,
+          "support": 198
+        },
+        "A2": {
+          "precision": 0.48936170212765956,
+          "recall": 0.23006573306659045,
+          "f1": 0.3129860031104199,
+          "support": 3499
+        },
+        "B1": {
+          "precision": 0.5036183328866256,
+          "recall": 0.21121852517985612,
+          "f1": 0.29761621921279796,
+          "support": 8896
+        },
+        "B2": {
+          "precision": 0.24634269379519086,
+          "recall": 0.37631646545080916,
+          "f1": 0.29776422764227645,
+          "support": 3893
+        },
+        "C1/C2": {
+          "precision": 0.11924756466241182,
+          "recall": 0.5877483443708609,
+          "f1": 0.19826864004468026,
+          "support": 1208
+        }
+      },
+      "weighted_avg": {
+        "precision": 0.4133362504593986,
+        "recall": 0.2767604837798124,
+        "f1": 0.2919580003994966,
+        "support": 17694
+      },
+      "macro_avg": {
+        "precision": 0.2899394783586462,
+        "recall": 0.3194536519974617,
+        "f1": 0.24604246515650646,
+        "support": 17694
+      }
+    }
+  },
+  "generalization": {
+    "gap": 0.5621274652417858,
+    "gap_percentage": 56.212746524178584
+  },
+  "per_corpus_results": {
+    "asag": {
+      "accuracy": 0.391304347826087,
+      "samples": 299
+    },
+    "icnale_we_learners": {
+      "accuracy": 0.14826923076923076,
+      "samples": 5200
+    },
+    "icnale_we_uae_learners": {
+      "accuracy": 0.32,
+      "samples": 200
+    },
+    "icnale_wep_learners": {
+      "accuracy": 0.18881856540084388,
+      "samples": 1896
+    },
+    "write_improve_first_and_final": {
+      "accuracy": 0.35518368155262897,
+      "samples": 10099
+    }
+  }
+}

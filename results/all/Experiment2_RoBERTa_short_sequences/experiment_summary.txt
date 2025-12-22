@@ -1,0 +1,85 @@
+EXPERIMENT: NAIVE BAYES CEFR - CORPUS-BASED EVALUATION
+================================================================================
+
+CONFIGURATION:
+--------------------------------------------------------------------------------
+  experiment_name: Experiment2_RoBERTa_short_sequences
+  output_dir: results/Experiment2_RoBERTa_short_sequences
+  train_path: dataset/splits/train_100k.csv
+  test_path: dataset/splits/test_other_corpora.csv
+  val_size: 0.2
+  random_state: 42
+  model_name: roberta-base
+  max_length: 256
+  batch_size: 32
+  epochs: 4
+  learning_rate: 2e-05
+  weight_decay: 0.01
+  freeze_encoder: False
+
+================================================================================
+IN-DOMAIN TEST RESULTS
+================================================================================
+
+Standard Metrics:
+  Exact Match Accuracy: 0.9824
+
+Classification Report:
+--------------------------------------------------------------------------------
+Class              Precision       Recall     F1-Score      Support
+--------------------------------------------------------------------------------
+Ordinal Classification Metrics:
+  Adjacent Accuracy (±1 level): 0.9966
+  Quadratic Weighted Kappa (QWK): 0.9913
+  Ordinal Classification Accuracy (OCA): 0.9902
+
+A1                    0.9925       0.9935       0.9930         2000
+A2                    0.9830       0.9845       0.9838         2000
+B1                    0.9794       0.9814       0.9804         1991
+B2                    0.9744       0.9739       0.9741         1875
+C1/C2                 0.9819       0.9740       0.9779         1000
+--------------------------------------------------------------------------------
+Weighted Avg          0.9824       0.9824       0.9824         8866
+Macro Avg             0.9822       0.9815       0.9818         8866
+
+================================================================================
+TEST RESULTS (Out-of-Domain)
+================================================================================
+
+Standard Metrics:
+  Exact Match Accuracy: 0.2447
+
+Ordinal Classification Metrics:
+  Adjacent Accuracy (±1 level): 0.7774
+  Quadratic Weighted Kappa (QWK): 0.3315
+  Ordinal Classification Accuracy (OCA): 0.5605
+
+Classification Report:
+--------------------------------------------------------------------------------
+Class              Precision       Recall     F1-Score      Support
+--------------------------------------------------------------------------------
+A1                    0.0739       0.4444       0.1268          198
+A2                    0.5558       0.1809       0.2730         3499
+B1                    0.5114       0.0779       0.1352         8896
+B2                    0.2527       0.6491       0.3638         3893
+C1/C2                 0.0970       0.3220       0.1491         1208
+--------------------------------------------------------------------------------
+Weighted Avg          0.4301       0.2447       0.2136        17694
+Macro Avg             0.2982       0.3349       0.2096        17694
+
+================================================================================
+GENERALIZATION ANALYSIS
+================================================================================
+
+Generalization Gap (In-Domain Test Accuracy - Out-Domain Test Accuracy): 0.7377 (73.77%)
+
+Per-Corpus Performance:
+--------------------------------------------------------------------------------
+Corpus                                          Accuracy         Samples
+--------------------------------------------------------------------------------
+asag                                              0.4214             299
+icnale_we_learners                                0.0602           5,200
+icnale_we_uae_learners                            0.4450             200
+icnale_wep_learners                               0.2120           1,896
+write_improve_first_and_final                     0.3367          10,099
+

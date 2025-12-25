@@ -19,6 +19,7 @@ class Word2VecClassifier(CEFRClassifier):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
         self.vectorizer = None
+        self.nn_model = None
         self.embedding_model = config.get('embedding_model', 'w2v')
         self.embedding_name = config.get('embedding_name',
                                          'glove-wiki-gigaword-300') if self.embedding_model == 'w2v' else 'Doc2Vec'
@@ -466,7 +467,7 @@ class Word2VecClassifier(CEFRClassifier):
     def save_model(self):
 
         save_path = self.config.get('output_dir')
-        name = self.config.get('experiment_name')
+        self.experiment_name = self.config.get('experiment_name')
         """Save all model components."""
         import os
         import json
@@ -479,10 +480,11 @@ class Word2VecClassifier(CEFRClassifier):
         embedding_model = self.results.get('embedding_model')  # You'll need to store this
 
         if self.embedding_model == 'doc2vec':
-            filename = f'{self.experiment_name}_{self.embedding_model}_epoch{self.doc2vec_epochs}_min{self.doc2vec_mincount}.pkl'
+            filename = f'{self.experiment_name}_{self.embedding_model}_epoch{self.doc2vec_epochs}_min{self.doc2vec_mincount}.bin'
+            self.vectorizer.save(os.path.join(save_path, filename))
         else:  # Word2Vec
             filename = f'{self.experiment_name}_{self.embedding_model}_{self.embedding_name}_{self.aggregation}.pkl'
-        joblib.dump(self.vectorizer, os.path.join(save_path, filename))
+            joblib.dump(self.vectorizer, os.path.join(save_path, filename))
 
         # 2. Save PyTorch neural network
         torch.save(self.model.state_dict(), os.path.join(save_path, 'nn_weights.pth'))
@@ -492,10 +494,11 @@ class Word2VecClassifier(CEFRClassifier):
             'embedding_model': self.embedding_model,
             'embedding_name': self.embedding_name,
             'aggregation': self.aggregation,
-            'embedding_dim': self.results.get('embedding_dim'),
-            'hidden_dim': self.config.get('hidden_dim', 128),
             'architecture': self.config.get('architecture', 'simple'),
-            'dropout_rate': self.config.get('dropout_rate', 0.3),
+            'embedding_dim': self.model.embedding_dim,
+            'hidden_dim': self.model.hidden_dim,
+            'dropout_rate': self.model.dropout,
+            'num_classes': self.model.num_classes
         }
 
         with open(os.path.join(save_path, 'config.json'), 'w') as f:

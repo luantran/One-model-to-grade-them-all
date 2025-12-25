@@ -5,12 +5,19 @@ import torch
 
 class Classifier(nn.Module):
     """Feedforward neural network for CEFR classification (5 classes)."""
-    def __init__(self, embedding_dim, hidden_dim=128, num_classes=5):
+    def __init__(self, embedding_dim, hidden_dim=128, num_classes=5, dropout=0.3):
         super().__init__()
+
+        # Store config as attributes for later saving
+        self.embedding_dim = embedding_dim
+        self.hidden_dim = hidden_dim
+        self.num_classes = num_classes
+        self.dropout = dropout
+
         self.fc1 = nn.Linear(embedding_dim, hidden_dim)
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(hidden_dim, num_classes)
-        self.dropout = nn.Dropout(0.3)
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, x):
         x = self.fc1(x)

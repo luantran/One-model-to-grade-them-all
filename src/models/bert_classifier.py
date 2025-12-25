@@ -182,6 +182,9 @@ class BERTClassifier(CEFRClassifier):
         trainer.train()
         print("Training complete")
 
+        self.trainer = trainer
+        self.model = model
+
         return trainer
 
 

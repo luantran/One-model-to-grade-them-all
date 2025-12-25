@@ -227,3 +227,6 @@ class BERTClassifier(CEFRClassifier):
             'accuracy': accuracy,
             'metrics': metrics,
         }
+
+    def save_model(self):
+        pass

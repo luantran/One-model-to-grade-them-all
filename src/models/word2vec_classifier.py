@@ -18,6 +18,7 @@ from src.models.neural_network import Classifier, DeepClassifier
 class Word2VecClassifier(CEFRClassifier):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
+        self.vectorizer = None
         self.embedding_model = config.get('embedding_model', 'w2v')
         self.embedding_name = config.get('embedding_name',
                                          'glove-wiki-gigaword-300') if self.embedding_model == 'w2v' else 'Doc2Vec'
@@ -25,6 +26,7 @@ class Word2VecClassifier(CEFRClassifier):
         self.batch_size = config.get('batch_size', 64)
         self.stop_words = config.get('stop_words', None)
         self.doc2vec_epochs = config.get('doc2vec_epochs', 10)
+        self.doc2vec_mincount = config.get('doc2vec_mincount', 2)
 
     def prepare_features(self, X_train, X_in_test, X_out_test, y_train, y_in_test, y_out_test) -> Dict[str, Any]:
         """
@@ -93,6 +95,8 @@ class Word2VecClassifier(CEFRClassifier):
         print(f"  Train batches: {len(train_loader)}")
         print(f"  Val batches: {len(val_loader)}")
         print(f"  Test batches: {len(test_loader)}")
+
+        self.vectorizer = model_obj
 
         # Return dictionary matching CEFRClassifier expectations
         return {
@@ -280,7 +284,7 @@ class Word2VecClassifier(CEFRClassifier):
 
         print(f"\nInitializing Doc2Vec model...")
         print(f"  Vector size: 300")
-        print(f"  Min count: 2")
+        print(f"  Min count: {self.doc2vec_mincount}")
         print(f"  Epochs: {self.doc2vec_epochs}")
 
         # Initialize Doc2Vec with 300-dimensional vectors
@@ -288,7 +292,7 @@ class Word2VecClassifier(CEFRClassifier):
         # epochs: can be congirued
         model_obj = Doc2Vec(
             vector_size=300,
-            min_count=2,
+            min_count=self.doc2vec_mincount,
             epochs=self.doc2vec_epochs,
             workers=4  # Use multiple cores for faster training
         )
@@ -300,11 +304,13 @@ class Word2VecClassifier(CEFRClassifier):
 
         # Train the model on the corpus
         print(f"\nTraining Doc2Vec model...")
-        model_obj.train(
-            tagged_data,
-            total_examples=model_obj.corpus_count,
-            epochs=model_obj.epochs
-        )
+        epochs = model_obj.epochs
+        for epoch in tqdm(range(epochs), desc="Training epochs", unit="epoch"):
+            model_obj.train(
+                tagged_data,
+                total_examples=model_obj.corpus_count,
+                epochs=1
+            )
 
         print(f"\n✓ Doc2Vec model trained successfully")
         print(f"  Dimensions: 300d")
@@ -456,6 +462,52 @@ class Word2VecClassifier(CEFRClassifier):
             dataset.append((doc_emb, int(label)))
 
         return dataset
+
+    def save_model(self):
+
+        save_path = self.config.get('output_dir')
+        name = self.config.get('experiment_name')
+        """Save all model components."""
+        import os
+        import json
+        import joblib
+        import torch
+
+        os.makedirs(save_path, exist_ok=True)
+
+        # 1. Save embedding model (from prepare_features)
+        embedding_model = self.results.get('embedding_model')  # You'll need to store this
+
+        if self.embedding_model == 'doc2vec':
+            filename = f'{self.experiment_name}_{self.embedding_model}_epoch{self.doc2vec_epochs}_min{self.doc2vec_mincount}.pkl'
+        else:  # Word2Vec
+            filename = f'{self.experiment_name}_{self.embedding_model}_{self.embedding_name}_{self.aggregation}.pkl'
+        joblib.dump(self.vectorizer, os.path.join(save_path, filename))
+
+        # 2. Save PyTorch neural network
+        torch.save(self.model.state_dict(), os.path.join(save_path, 'nn_weights.pth'))
+
+        # 3. Save configuration
+        config_to_save = {
+            'embedding_model': self.embedding_model,
+            'embedding_name': self.embedding_name,
+            'aggregation': self.aggregation,
+            'embedding_dim': self.results.get('embedding_dim'),
+            'hidden_dim': self.config.get('hidden_dim', 128),
+            'architecture': self.config.get('architecture', 'simple'),
+            'dropout_rate': self.config.get('dropout_rate', 0.3),
+        }
+
+        with open(os.path.join(save_path, 'config.json'), 'w') as f:
+            json.dump(config_to_save, f, indent=2)
+
+        # 4. Save TF-IDF vectorizer if used
+        if self.aggregation == 'tfidf_weighted':
+            tfidf_vec = self.results.get('tfidf_vectorizer')
+            if tfidf_vec:
+                joblib.dump(tfidf_vec, os.path.join(save_path, 'tfidf_vectorizer.pkl'))
+
+        print(f"✓ Model saved to {save_path}")
 
 class PyTorchModelWrapper:
     """

@@ -260,3 +260,7 @@ class CEFRClassifier(ABC):
         Train the classification model.
         """
         pass
+
+    @abstractmethod
+    def save_model(self):
+        pass

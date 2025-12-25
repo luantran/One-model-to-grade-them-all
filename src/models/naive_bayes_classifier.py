@@ -68,14 +68,15 @@ class NBClassifier(CEFRClassifier):
         return self.model
 
     def save_model(self):
-
         save_path = self.config.get('output_dir')
+        subdir = os.path.join(save_path, 'nb/')
+
+        os.makedirs(subdir, exist_ok=True)
         name = self.config.get('experiment_name')
         # Save vectorizer
-        filename_vectorizer = os.path.join(save_path, name + "_vectorizer.pkl")
-        print(filename_vectorizer)
+        filename_vectorizer = os.path.join(subdir, "vectorizer.pkl")
         joblib.dump(self.vectorizer, filename_vectorizer)
 
-        filename_model = os.path.join(save_path, name + "_model.pkl")
+        filename_model = os.path.join(subdir, "model.pkl")
         # Save model
         joblib.dump(self.model, filename_model)

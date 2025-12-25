@@ -497,7 +497,7 @@ class Word2VecClassifier(CEFRClassifier):
             'architecture': self.config.get('architecture', 'simple'),
             'embedding_dim': self.model.embedding_dim,
             'hidden_dim': self.model.hidden_dim,
-            'dropout_rate': self.model.dropout,
+            'dropout_rate': self.model.dropout_rate,
             'num_classes': self.model.num_classes
         }
 

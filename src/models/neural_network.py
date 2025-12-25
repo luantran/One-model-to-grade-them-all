@@ -12,7 +12,7 @@ class Classifier(nn.Module):
         self.embedding_dim = embedding_dim
         self.hidden_dim = hidden_dim
         self.num_classes = num_classes
-        self.dropout = dropout
+        self.dropout_rate = dropout
 
         self.fc1 = nn.Linear(embedding_dim, hidden_dim)
         self.relu = nn.ReLU()

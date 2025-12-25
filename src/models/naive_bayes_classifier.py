@@ -1,8 +1,10 @@
+import os.path
 from typing import Any, Dict, Tuple
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from tqdm import tqdm
+import joblib
 
 from src.models.cefr_classifier import CEFRClassifier
 
@@ -29,6 +31,7 @@ class NBClassifier(CEFRClassifier):
             )
         else:
             raise ValueError("Vectorizer type: method must be 'count' or 'tfidf'")
+        self.config = config
 
     def prepare_features(self, X_train, X_in_test, X_out_test, y_train, y_in_test, y_out_test):
         """Convert text to bag-of-words features."""
@@ -60,4 +63,19 @@ class NBClassifier(CEFRClassifier):
         model = MultinomialNB(alpha=self.config.get('alpha', 1.0))
         model.fit(X_train, y_train)
         print(f"✓ Model trained with classes: {model.classes_}")
-        return model
+        self.model = model
+
+        return self.model
+
+    def save_model(self):
+
+        save_path = self.config.get('output_dir')
+        name = self.config.get('experiment_name')
+        # Save vectorizer
+        filename_vectorizer = os.path.join(save_path, name + "_vectorizer.pkl")
+        print(filename_vectorizer)
+        joblib.dump(self.vectorizer, filename_vectorizer)
+
+        filename_model = os.path.join(save_path, name + "_model.pkl")
+        # Save model
+        joblib.dump(self.model, filename_model)

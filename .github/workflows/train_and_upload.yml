@@ -11,6 +11,7 @@ env:
   NB_MODEL_DIR: 'NaiveBayes'
   NB_SUBDIR: 'nb/'
   NB_HF_REPO: 'theluantran/cefr-naive-bayes'
+  PYTHONPATH: ${{ github.workspace }}/code
 
 jobs:
   train-and-upload:
@@ -50,8 +51,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Train Naive Bayes
+        working-directory: ./code
         run: |
-          cd code
           python src/scripts/train_nb.py --model ${{ env.NB_MODEL_DIR }} --output-dir ${{ env.ARTIFACTS_DIR }}
 
       - name: Get Evaluation metrics (Naive Bayes)
@@ -64,11 +65,7 @@ jobs:
           echo "nb_f1=$(jq -r '.in_domain_test_results.classification_metrics.weighted_avg.f1' ${{ env.ARTIFACTS_DIR }}/${{ env.NB_MODEL_DIR }}/results.json)" >> $GITHUB_OUTPUT
 
       - name: Upload to HuggingFace
+        working-directory: ./code
         if: steps.evaluate_nb.outputs.nb_f1 > 0.70
         run: |
-          cd code
           python src/scripts/upload_nb.py --dir ${{ env.ARTIFACTS_DIR }}/${{ env.NB_MODEL_DIR }}/${{ env.NB_SUBDIR }} --token ${{ secrets.HF_TOKEN }} --repo-dir ${{ env.NB_HF_REPO }}
-
-      - name: Cleanup
-        if: always()
-        run: rm -rf ${{ env.DATA_DIR }}

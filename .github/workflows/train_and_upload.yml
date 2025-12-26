@@ -27,7 +27,7 @@ on:
 env:
   ARTIFACTS_DIR: 'artifacts'
   NB_MODEL_DIR: 'NaiveBayes'
-  NB_SUBDIR: 'nb/'
+  NB_SUBDIR: 'nb'
   NB_HF_REPO: 'theluantran/cefr-naive-bayes'
   PYTHONPATH: ${{ github.workspace }}/code
 

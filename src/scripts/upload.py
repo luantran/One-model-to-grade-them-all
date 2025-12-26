@@ -9,9 +9,6 @@ from pathlib import Path
 from huggingface_hub import HfApi, create_repo
 from huggingface_hub.utils import RepositoryNotFoundError
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 def upload_directory_to_hf(
         directory_path: str,
         repo_id: str,
@@ -65,12 +62,12 @@ def upload_directory_to_hf(
         raise ValueError(f"Path is not a directory: {directory_path}")
 
     # Create repo if doesn't exist
-    logger.info(f"Checking repo '{repo_id}'...")
+    print(f"Checking repo '{repo_id}'...")
     try:
         api.repo_info(repo_id=repo_id, repo_type="model")
-        logger.info(f"✓ Repo exists")
+        print(f"✓ Repo exists")
     except RepositoryNotFoundError:
-        logger.info(f"Creating repo '{repo_id}'...")
+        print(f"Creating repo '{repo_id}'...")
         create_repo(
             repo_id=repo_id,
             repo_type="model",
@@ -78,10 +75,10 @@ def upload_directory_to_hf(
             exist_ok=True,
             token=token
         )
-        logger.info(f"✓ Created {'private' if private else 'public'} repo")
+        print(f"✓ Created {'private' if private else 'public'} repo")
 
     # Upload entire folder
-    logger.info(f"Uploading directory '{directory_path}' to '{repo_id}/{path_in_repo}'...")
+    print(f"Uploading directory '{directory_path}' to '{repo_id}/{path_in_repo}'...")
 
     api.upload_folder(
         folder_path=str(dir_path),
@@ -92,7 +89,7 @@ def upload_directory_to_hf(
         ignore_patterns=ignore_patterns or []
     )
 
-    logger.info("✓ Directory uploaded successfully")
+    print("✓ Directory uploaded successfully")
 
 
 if __name__ == "__main__":
@@ -148,8 +145,8 @@ if __name__ == "__main__":
 
     # Success
     url = f"https://huggingface.co/{args.repo_id}"
-    logger.info(f"\n{'=' * 60}")
-    logger.info(f"✓ SUCCESS!")
-    logger.info(f"✓ Model URL: {url}")
-    logger.info(f"✓ Visibility: {'Private' if args.private else 'Public'}")
-    logger.info(f"{'=' * 60}\n")
+    print(f"\n{'=' * 60}")
+    print(f"✓ SUCCESS!")
+    print(f"✓ Model URL: {url}")
+    print(f"✓ Visibility: {'Private' if args.private else 'Public'}")
+    print(f"{'=' * 60}\n")

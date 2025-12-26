@@ -466,17 +466,17 @@ class Word2VecClassifier(CEFRClassifier):
 
         return dataset
 
-    def save_model(self):
+    def save_model(self, subdir = 'doc2vec/'):
 
         save_path = self.config.get('output_dir')
-        subdir = os.path.join(save_path, 'doc2vec/')
+        subdir = os.path.join(save_path, subdir)
         self.experiment_name = self.config.get('experiment_name')
         """Save all model components."""
         os.makedirs(save_path, exist_ok=True)
         os.makedirs(subdir, exist_ok=True)
         # 1. Save embedding model (from prepare_features)
         if self.embedding_model == 'doc2vec':
-            filename = f'{self.experiment_name}_{self.embedding_model}_epoch{self.doc2vec_epochs}_min{self.doc2vec_mincount}.bin'
+            filename = f'doc2vec_model.bin'
             self.vectorizer.save(os.path.join(subdir, filename))
         else:  # Word2Vec
             filename = f'{self.experiment_name}_{self.embedding_model}_{self.embedding_name}_{self.aggregation}.pkl'

@@ -19,6 +19,12 @@ if __name__ == "__main__":
         default=f'{SAVED_MODELS_DIR}',
         help="Output directory"
     )
+    parser.add_argument(
+        "--subdir",
+        type=str,
+        default=f'nb/',
+        help="Subdirectory in output directory"
+    )
     args = parser.parse_args()
 
     nb_config = {
@@ -46,7 +52,7 @@ if __name__ == "__main__":
     })
     ablation_results = nb_classifier.run_experiment()
 
-    nb_classifier.save_model()
+    nb_classifier.save_model(args.subdir)
 
     print(f"\n✓ {nb_config['experiment_name']} completed")
     print(f"  In-Domain Accuracy: {ablation_results['in-domain-test']['accuracy']:.4f}")

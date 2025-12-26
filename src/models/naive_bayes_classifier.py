@@ -68,9 +68,9 @@ class NBClassifier(CEFRClassifier):
 
         return self.model
 
-    def save_model(self):
+    def save_model(self, subdir = 'nb/'):
         save_path = self.config.get('output_dir')
-        subdir = os.path.join(save_path, 'nb/')
+        subdir = os.path.join(save_path, subdir)
 
         os.makedirs(subdir, exist_ok=True)
         name = self.config.get('experiment_name')

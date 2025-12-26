@@ -74,7 +74,8 @@ jobs:
         run: |
           python src/scripts/train_nb.py \
           --model ${{ env.NB_MODEL_DIR }} \
-          --output-dir ${{ env.ARTIFACTS_DIR }}
+          --output-dir ${{ env.ARTIFACTS_DIR }} \ 
+          --subdir ${{ env.NB_SUBDIR }}
 
       - name: Get Evaluation metrics (Naive Bayes)
         if: inputs.train_naive_bayes

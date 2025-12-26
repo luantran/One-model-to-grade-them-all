@@ -68,4 +68,4 @@ jobs:
         working-directory: ./code
         if: steps.evaluate_nb.outputs.nb_f1 > 0.70
         run: |
-          python src/scripts/upload_nb.py --dir ${{ env.ARTIFACTS_DIR }}/${{ env.NB_MODEL_DIR }}/${{ env.NB_SUBDIR }} --token ${{ secrets.HF_TOKEN }} --repo-dir ${{ env.NB_HF_REPO }}
+          python src/scripts/upload_nb.py --dir ${{ env.ARTIFACTS_DIR }}/${{ env.NB_MODEL_DIR }}/${{ env.NB_SUBDIR }} --token ${{ secrets.HF_TOKEN }} --repo-id ${{ env.NB_HF_REPO }}

@@ -27,7 +27,7 @@ jobs:
         with:
           repository: luantran/cefr_data_private
           token: ${{ secrets.DATA_REPO_TOKEN }}
-          path: code/
+          path: data/
           lfs: true
 
       - name: Verify data download

@@ -96,7 +96,7 @@ jobs:
           steps.evaluate_nb.outputs.nb_f1 > inputs.min_f1_threshold
         working-directory: ./code
         run: |
-          python src/scripts/upload_nb.py \
+          python src/scripts/upload.py \
             --dir ${{ env.ARTIFACTS_DIR }}/${{ env.NB_MODEL_DIR }}/${{ env.NB_SUBDIR }} \
             --token ${{ secrets.HF_TOKEN }} \
             --repo-id ${{ env.NB_HF_REPO }}

@@ -1,7 +1,6 @@
 # Define the neural network
-import numpy as np
 from torch import nn
-import torch
+
 
 class Classifier(nn.Module):
     """Feedforward neural network for CEFR classification (5 classes)."""

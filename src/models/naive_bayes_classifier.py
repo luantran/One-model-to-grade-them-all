@@ -1,10 +1,11 @@
 import os.path
-from typing import Any, Dict, Tuple
+from typing import Any, Dict
+
+import joblib
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from tqdm import tqdm
-import joblib
 
 from src.models.cefr_classifier import CEFRClassifier
 

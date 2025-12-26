@@ -3,15 +3,13 @@ Evaluation utilities for ordinal classification tasks.
 """
 import os
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import (
-    accuracy_score, mean_squared_error, mean_absolute_error,
-    cohen_kappa_score, classification_report, confusion_matrix, precision_recall_fscore_support
-)
-from scipy.stats import wasserstein_distance
-import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics import (
+    accuracy_score, cohen_kappa_score, confusion_matrix, precision_recall_fscore_support
+)
 
 
 def encode_labels_to_numeric(labels):

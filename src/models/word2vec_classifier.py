@@ -1,17 +1,19 @@
+import json
+import os
 from typing import Dict, Any, List, Tuple
-import pandas as pd
+
+import gensim.downloader as api
+import joblib
 import numpy as np
-import torch
-from gensim.models.doc2vec import TaggedDocument, Doc2Vec
-from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from gensim.models.doc2vec import TaggedDocument, Doc2Vec
+from sklearn.feature_extraction.text import TfidfVectorizer
 from tqdm import tqdm
 
 from src.models.cefr_classifier import CEFRClassifier
-import gensim.downloader as api
-
 from src.models.neural_network import Classifier, DeepClassifier
 
 
@@ -467,27 +469,21 @@ class Word2VecClassifier(CEFRClassifier):
     def save_model(self):
 
         save_path = self.config.get('output_dir')
+        subdir = os.path.join(save_path, 'doc2vec/')
         self.experiment_name = self.config.get('experiment_name')
         """Save all model components."""
-        import os
-        import json
-        import joblib
-        import torch
-
         os.makedirs(save_path, exist_ok=True)
-
+        os.makedirs(subdir, exist_ok=True)
         # 1. Save embedding model (from prepare_features)
-        embedding_model = self.results.get('embedding_model')  # You'll need to store this
-
         if self.embedding_model == 'doc2vec':
             filename = f'{self.experiment_name}_{self.embedding_model}_epoch{self.doc2vec_epochs}_min{self.doc2vec_mincount}.bin'
-            self.vectorizer.save(os.path.join(save_path, filename))
+            self.vectorizer.save(os.path.join(subdir, filename))
         else:  # Word2Vec
             filename = f'{self.experiment_name}_{self.embedding_model}_{self.embedding_name}_{self.aggregation}.pkl'
-            joblib.dump(self.vectorizer, os.path.join(save_path, filename))
+            joblib.dump(self.vectorizer, os.path.join(subdir, filename))
 
         # 2. Save PyTorch neural network
-        torch.save(self.model.state_dict(), os.path.join(save_path, 'nn_weights.pth'))
+        torch.save(self.model.state_dict(), os.path.join(subdir, 'nn_weights.pth'))
 
         # 3. Save configuration
         config_to_save = {
@@ -501,16 +497,16 @@ class Word2VecClassifier(CEFRClassifier):
             'num_classes': self.model.num_classes
         }
 
-        with open(os.path.join(save_path, 'config.json'), 'w') as f:
+        with open(os.path.join(subdir, 'config.json'), 'w') as f:
             json.dump(config_to_save, f, indent=2)
 
         # 4. Save TF-IDF vectorizer if used
         if self.aggregation == 'tfidf_weighted':
             tfidf_vec = self.results.get('tfidf_vectorizer')
             if tfidf_vec:
-                joblib.dump(tfidf_vec, os.path.join(save_path, 'tfidf_vectorizer.pkl'))
+                joblib.dump(tfidf_vec, os.path.join(subdir, 'tfidf_vectorizer.pkl'))
 
-        print(f"✓ Model saved to {save_path}")
+        print(f"✓ Model saved to {subdir}")
 
 class PyTorchModelWrapper:
     """

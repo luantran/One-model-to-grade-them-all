@@ -1,8 +1,10 @@
 from typing import Dict, Any
+
 import numpy as np
 import pandas as pd
 import torch
 from datasets import Dataset
+from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 from sklearn.model_selection import train_test_split
 from transformers import (
     AutoTokenizer,
@@ -10,7 +12,6 @@ from transformers import (
     TrainingArguments,
     Trainer
 )
-from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 from src.models.cefr_classifier import CEFRClassifier
 

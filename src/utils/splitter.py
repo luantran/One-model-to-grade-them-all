@@ -2,8 +2,8 @@
 Data utilities for text classification experiments.
 Common functions for loading, cleaning, exploring, and splitting datasets.
 """
-import sys
 import os
+import sys
 
 import pandas as pd
 

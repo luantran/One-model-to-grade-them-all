@@ -10,13 +10,11 @@ from pathlib import Path
 from huggingface_hub import HfApi, create_repo
 from huggingface_hub.utils import RepositoryNotFoundError
 
-from src.scripts.upload import upload_directory_to_hf
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def upload_naive_bayes(
+def upload_doc2vec(
         model_path: str,
         vectorizer_path: str,
         repo_id: str,
@@ -212,125 +210,4 @@ def main():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Upload directory to HuggingFace Hub"
-    )
-    parser.add_argument(
-        "--dir",
-        type=str,
-        required=True,
-        help="Path to directory to upload"
-    )
-    parser.add_argument(
-        "--repo-id",
-        type=str,
-        default='theluantran/cefr-naive-bayes',
-        help="HuggingFace repo ID (e.g., luantran/my-model)"
-    )
-    parser.add_argument(
-        "--path-in-repo",
-        type=str,
-        default=".",
-        help="Path within repo to place files (default: root)"
-    )
-    parser.add_argument(
-        "--private",
-        action="store_true",
-        help="Make repo private"
-    )
-    parser.add_argument(
-        "--token",
-        type=str,
-        default=None,
-        help="HuggingFace token (default: uses HF_TOKEN env var)"
-    )
-    parser.add_argument(
-        "--ignore",
-        nargs="*",
-        default=[],
-        help="Patterns to ignore (e.g., *.pyc __pycache__)"
-    )
-
-    args = parser.parse_args()
-
-    upload_directory_to_hf(
-        directory_path=args.dir,
-        repo_id=args.repo_id,
-        path_in_repo=args.path_in_repo,
-        private=args.private,
-        token=args.token,
-        ignore_patterns=args.ignore
-    )
-
-    # Step 3: Create README
-    logger.info("Creating README...")
-    readme = \
-    f"""---
-tags:
-- text-classification
-- cefr
-- naive-bayes
-language:
-- en
-license: mit
----
-
-# CEFR Naive Bayes Classifier
-
-Naive Bayes model for classifying text by CEFR proficiency levels.
-
-## Labels
-- **A1**: Beginner
-- **A2**: Elementary  
-- **B1**: Intermediate
-- **B2**: Upper Intermediate
-- **C1/C2**: Advanced
-
-## Usage
-```python
-from huggingface_hub import hf_hub_download
-import joblib
-
-# Download model
-model_path = hf_hub_download(
-    repo_id="{args.repo_id}",
-    filename="model.joblib"
-)
-
-# Load model
-model = joblib.load(model_path)
-
-# Predict
-text = "This is a sample text to classify"
-prediction = model.predict([text])[0]
-probabilities = model.predict_proba([text])[0]
-
-print(f"Predicted level: {{prediction}}")
-print(f"Confidence: {{max(probabilities):.2%}}")
-```
-
-## Model Info
-- **Type**: Multinomial Naive Bayes
-- **Framework**: scikit-learn
-- **Task**: Multi-class text classification
-
-Last updated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-"""
-    api = HfApi(token=args.token)
-
-    api.upload_file(
-        path_or_fileobj=readme.encode(),
-        path_in_repo="README.md",
-        repo_id=args.repo_id,
-        repo_type="model",
-        commit_message="Update README"
-    )
-    logger.info("✓ README uploaded")
-
-    # Success
-    url = f"https://huggingface.co/{args.repo_id}"
-    logger.info(f"\n{'=' * 60}")
-    logger.info(f"✓ SUCCESS!")
-    logger.info(f"✓ Model URL: {url}")
-    logger.info(f"✓ Visibility: {'Private' if args.private else 'Public'}")
-    logger.info(f"{'=' * 60}\n")
+    main()

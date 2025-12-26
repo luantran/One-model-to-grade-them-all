@@ -1,7 +1,8 @@
+import os
+import sys
+
 import matplotlib.pyplot as plt
 import pandas as pd
-import sys
-import os
 
 """
 Explorer that loads csv files and displays statistics and generates chart for them

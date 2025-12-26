@@ -1,7 +1,8 @@
+import csv
 import os
 import xml.etree.ElementTree as ET
 from pathlib import Path
-import csv
+
 """
 XML parser for extracting learner metadata 
 from ASAG corpus files and exporting to CSV.

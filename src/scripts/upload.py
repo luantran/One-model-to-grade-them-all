@@ -1,12 +1,12 @@
 """
 Upload entire directory to HuggingFace Hub
 """
-from huggingface_hub import HfApi, create_repo
-from huggingface_hub.utils import RepositoryNotFoundError
-import argparse
-from pathlib import Path
 import logging
 import os
+from pathlib import Path
+
+from huggingface_hub import HfApi, create_repo
+from huggingface_hub.utils import RepositoryNotFoundError
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

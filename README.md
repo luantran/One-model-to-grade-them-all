@@ -3,6 +3,12 @@ by Luan Tran
 ## Overview
 
 This project implements and compares multiple machine learning approaches for automatic CEFR (Common European Framework of Reference for Languages) level classification of English learner texts. The system trains on the large-scale EFCamDAT corpus and evaluates on multiple out-of-domain datasets (Write & Improve, ICNALE, ASAG) to assess cross-corpus generalization.
+The training of the NaiveBayes and Doc2Vec has been automated by Github Actions and automatically updated to HuggingFace. The BERT model has been manually trained and pushed to HuggingFace independently.
+
+Below are the links to the trained models on HuggingFace:
+1. Naive Bayes: https://huggingface.co/theluantran/cefr-naive-bayes
+2. Doc2Vec: https://huggingface.co/theluantran/cefr-doc2vec
+3. BERT finetuned: https://huggingface.co/theluantran/cefr-bert-classifier
 
 ### Key Features
 
